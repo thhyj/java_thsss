@@ -2,6 +2,10 @@ package thsss;
 
 public class Point {
     public double x, y;
+    public Point(Point a) {
+        this.x = a.x;
+        this.y = a.y;
+    }
     public Point(double x, double y) {
         this.x = x;
         this.y = y;

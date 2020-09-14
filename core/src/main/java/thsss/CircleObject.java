@@ -1,5 +1,6 @@
 package thsss;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -9,7 +10,8 @@ import com.badlogic.gdx.utils.Array;
 //CircleObject means Objects who's collision boxes are a circle.
 public class CircleObject extends Actor {
     protected Thsss thsss;
-    protected Point initPosition, nowPosition, lastPosition, temp;
+    protected Point initPosition, nowPosition, lastPosition,checkPointPosition, temp;
+    private Texture point;
     protected Sprite appearance;
     protected TextureRegion image;
     protected double radius;
@@ -21,9 +23,12 @@ public class CircleObject extends Actor {
         this.thsss = thsss;
     }
     public CircleObject(Point point, TextureRegion img, Thsss thsss) {
+        this.point = thsss.manager.get("Image/point.png", Texture.class);
         this.thsss = thsss;
         this.initPosition = point;
-        this.nowPosition = this.initPosition;
+        this.nowPosition = new Point(this.initPosition);
+        this.checkPointPosition = new Point(this.nowPosition);
+        updateCheckPointPosition();
         this.image = new TextureRegion(img);
         appearance = new Sprite(this.image);
         damage = true;
@@ -35,6 +40,14 @@ public class CircleObject extends Actor {
        // nowPosition.y = (int)(nowPosition.y);
 
     }
+
+    private void updateCheckPointPosition() {
+        checkPointPosition.x = nowPosition.x + getWidth() / 2;
+
+        checkPointPosition.y = nowPosition.y + getHeight() / 2;
+
+    }
+
     protected void getAngle() {
         temp = nowPosition.minus(initPosition);
        // temp.y = Math.round(nowPosition.y) - Math.round(nowPosition.y);
@@ -48,8 +61,13 @@ public class CircleObject extends Actor {
     }
     protected boolean checkHit() {
         if(damage) {
-            return nowPosition.getdis(thsss.gameScreen.gameStage.character.getPosition()) <
-                    radius + thsss.gameScreen.gameStage.character.getRadius();
+            //System.out.println(checkPointPosition.getdis(thsss.gameScreen.gameStage.character.getCheckPosition()));
+           // System.out.println(radius + thsss.gameScreen.gameStage.character.getRadius());
+            if(checkPointPosition.getdis(thsss.gameScreen.gameStage.character.getCheckPosition()) <
+                    radius + thsss.gameScreen.gameStage.character.getRadius()){
+                return true;
+            }
+
         }
         return false;
     }
@@ -63,8 +81,10 @@ public class CircleObject extends Actor {
         existTime += delta;
         move();
         getAngle();
-        thsss.gameScreen.hit = checkHit();
+        thsss.gameScreen.hit |= checkHit() && this.remove();
+
         checkDispose();
+        updateCheckPointPosition();
     }
 
     @Override
@@ -75,6 +95,7 @@ public class CircleObject extends Actor {
         appearance.setPosition((float)nowPosition.x, (float)nowPosition.y);
         appearance.setRotation((float)angle);
         appearance.draw(batch);
+        batch.draw(point, (float)checkPointPosition.x, (float)checkPointPosition.y);
     }
     @Override
     public float getX(){

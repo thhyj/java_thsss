@@ -22,7 +22,8 @@ public class Thsss extends Game {
         manager = new AssetManager();
     //    Sa = new Texture();
    //     Sa = new Texture(Gdx.files.internal("Sanae.png"));
-
+        manager.load("Image/point.png",Texture.class);
+        manager.load("Image/MyPlane/Center.png", Texture.class);
         manager.load("Image/MyPlane/Sanae.png", Texture.class);
         manager.load("Image/Bullet/bullet-8.png", Texture.class);
         manager.load("Sound/se_pldead00.wav", Sound.class);

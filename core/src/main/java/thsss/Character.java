@@ -14,6 +14,7 @@ public class Character extends Actor {
     //private Array<TextureRegion>[] Sanae;
     private Thsss thsss;
     private TextureRegion[][] Sanae;
+    private Texture checkPoint;
     private Texture Sa;
     private int moveStatus;
     private long lastSanaeTime;
@@ -24,6 +25,13 @@ public class Character extends Actor {
     private static final int sqrt270 = 191;
     private static final int lowSqrt270 = 85;
     private double characterX, characterY, radius;
+    public double checkPointX, checkPointY;
+    public boolean unbreakable = false;
+    public long lastHitTime;
+    public boolean controlling = true;
+    public boolean reborning = false;
+    public long lastLostControlTime;
+    public boolean visible = true;
     public Character(Thsss thsss) {
         this.thsss = thsss;
         characterX= 40;
@@ -36,6 +44,8 @@ public class Character extends Actor {
         return thsss.moveStatus;
     }
     private void init() {
+        radius = 3;
+        checkPoint = thsss.manager.get("Image/MyPlane/Center.png", Texture.class);
         Sa = thsss.manager.get("Image/MyPlane/Sanae.png", Texture.class);
         Sanae = new TextureRegion[3][8];
         for(int i = 0; i < 3; ++i) {
@@ -44,78 +54,121 @@ public class Character extends Actor {
             }
         }
     }
+
+    public void reborn() {
+        unbreakable = true;
+        lastHitTime = TimeUtils.nanoTime();
+        controlling = false;
+        reborning = true;
+        characterX = 35 + (420 - 35) / 2 - 16;
+        characterY = -50;
+        this.setY((float) characterY);
+        this.setX((float) characterX);
+        updateCheckPoint();
+
+    }
+
+    private void updateCheckPoint() {
+        checkPointX = characterX + 16;
+        checkPointY = characterY + 24;
+    }
+
     @Override
     public void act(float delta){
         int speed = thsss.lowSpeed ? 120:270;
         int sqrtSpeed = thsss.lowSpeed?lowSqrt270:sqrt270;
         ++totFrame;
  //       System.out.println(sqrtSpeed);
-        switch (getMoveStatus()) {
-            case 1:
-                characterY += speed *delta;
-                this.setY((float)characterY);
-                sanaeType = 0;
-                break;
-            case 2:
-                characterX += speed * delta;
-                this.setX((float)characterX);
-                sanaeType = 2;
-                break;
-            case 3:
-                characterY -= speed * delta;
-                this.setY((float)characterY);
-                sanaeType = 0;
-                break;
-            case 4:
-                characterX -= speed   * delta;
-                this.setX((float) characterX);
-                sanaeType = 1;
-                break;
-            case 5:
-                characterY += sqrtSpeed * delta;
-                characterX += sqrtSpeed * delta;
-                this.setY((float)characterY);
-                this.setX((float)characterX);
-                sanaeType = 2;
-                break;
-            case 6:
-                characterY -= sqrtSpeed * delta;
-                characterX += sqrtSpeed * delta;
-                this.setY((float)characterY);
-                this.setX((float)characterX);
-                sanaeType = 2;
-                break;
-            case 7:
-                characterY -= sqrtSpeed * delta;
-                characterX -= sqrtSpeed * delta;
-                this.setY((float)characterY);
-                this.setX((float)characterX);
-                sanaeType = 1;
-                break;
-            case 8:
-                characterY += sqrtSpeed * delta;
-                characterX -= sqrtSpeed * delta;
-                this.setY((float)characterY);
-                this.setX((float)characterX);
-                sanaeType = 1;
-                break;
-            case 0:
-                sanaeType = 0;
-                break;
-        }
-        if(characterX < 35) {
-            characterX = 35;
-        }
-        if(characterX > 420 - 32) {
-            characterX = 420 - 32;
-        }
-        if(characterY > 465 - 48) {
-            characterY = 465 - 48;
-        }
-        if(characterY < 15){
-            characterY = 15;
-        }
+        if(controlling) {
+            switch (getMoveStatus()) {
+                case 1:
+                    characterY += speed * delta;
+                    this.setY((float) characterY);
+                    sanaeType = 0;
+                    break;
+                case 2:
+                    characterX += speed * delta;
+                    this.setX((float) characterX);
+                    sanaeType = 2;
+                    break;
+                case 3:
+                    characterY -= speed * delta;
+                    this.setY((float) characterY);
+                    sanaeType = 0;
+                    break;
+                case 4:
+                    characterX -= speed * delta;
+                    this.setX((float) characterX);
+                    sanaeType = 1;
+                    break;
+                case 5:
+                    characterY += sqrtSpeed * delta;
+                    characterX += sqrtSpeed * delta;
+                    this.setY((float) characterY);
+                    this.setX((float) characterX);
+                    sanaeType = 2;
+                    break;
+                case 6:
+                    characterY -= sqrtSpeed * delta;
+                    characterX += sqrtSpeed * delta;
+                    this.setY((float) characterY);
+                    this.setX((float) characterX);
+                    sanaeType = 2;
+                    break;
+                case 7:
+                    characterY -= sqrtSpeed * delta;
+                    characterX -= sqrtSpeed * delta;
+                    this.setY((float) characterY);
+                    this.setX((float) characterX);
+                    sanaeType = 1;
+                    break;
+                case 8:
+                    characterY += sqrtSpeed * delta;
+                    characterX -= sqrtSpeed * delta;
+                    this.setY((float) characterY);
+                    this.setX((float) characterX);
+                    sanaeType = 1;
+                    break;
+                case 0:
+                    sanaeType = 0;
+                    break;
+            }
+            if (characterX < 35) {
+                characterX = 35;
+            }
+            if (characterX > 420 - 32) {
+                characterX = 420 - 32;
+            }
+            if (characterY > 465 - 48) {
+                characterY = 465 - 48;
+            }
+            if (characterY < 15) {
+                characterY = 15;
+            }
+        } else {
+            if(reborning) {
+                characterY += 75 * delta;
+                this.setY((float) characterY);
+                if(TimeUtils.nanoTime() - lastHitTime > 1000000000) {
+                    reborning = false;
+                    controlling = true;
+                }
+              //  System.out.println(characterX);
+              //  System.out.println(checkPointX);
 
+            }
+        }
+        if(TimeUtils.nanoTime() - lastHitTime > 5000000000l) {
+            unbreakable = false;
+            visible = true;
+        }
+        if(unbreakable) {
+            if(((TimeUtils.nanoTime() - lastHitTime) / 25000000) % 2 == 0) {
+                visible = false;
+            } else {
+                visible = true;
+            }
+        }
         if(sanaeType != preSanaeType) {
             sanaeTot = 0;
         } else {
@@ -134,14 +187,24 @@ public class Character extends Actor {
         }
         preSanaeType = sanaeType;
       //  System.out.println("acting");
+        updateCheckPoint();
     }
     @Override
     public void draw(Batch batch, float delta) {
-        batch.draw(Sanae[sanaeType][sanaeTot], getX(), getY());
-       // System.out.println("drawing");
+        if(visible){
+            batch.draw(Sanae[sanaeType][sanaeTot], getX(), getY());
+            if(thsss.lowSpeed) {
+                batch.draw(checkPoint, (float) checkPointX - 8, (float) checkPointY - 8);
+            }
+        }
+        // System.out.println("drawing");
+
     }
     public Point getPosition() {
         return new Point(characterX, characterY);
+    }
+    public Point getCheckPosition() {
+        return new Point(checkPointX, checkPointY);
     }
     public double getRadius() {
         return radius;

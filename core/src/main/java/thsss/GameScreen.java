@@ -55,12 +55,16 @@ public class GameScreen extends ScreenAdapter {
         font = new BitmapFont();
     }
     private void miss() {
-        System.out.println("miss");
-        missSound.play();
-        life -= 1;
-        bomb = 3;
-        if(life == 0) {
-            pause();
+      //  System.out.println("hit");
+        if(!gameStage.character.unbreakable) {
+     //       System.out.println("miss");
+            missSound.play();
+            life -= 1;
+            bomb = 3;
+            if(life == 0) {
+                pause();
+            }
+            gameStage.character.reborn();
         }
     }
     private void characterMove() {

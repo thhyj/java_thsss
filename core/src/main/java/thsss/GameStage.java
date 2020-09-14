@@ -14,6 +14,7 @@ import com.badlogic.gdx.utils.viewport.ScalingViewport;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import thsss.MoveMethod.LineMove;
 import thsss.actors.InterFace;
+import thsss.bullets.RiceBullet;
 
 import java.util.ArrayList;
 
@@ -35,12 +36,17 @@ public class GameStage extends Stage {
     }
     private void createBullets() {
         for(int i = 1; i <= 100; ++i) {
-            CircleObject bulletTest = new CircleObject(new Point(200, 400),
+            RiceBullet bulletTest = (RiceBullet) new RiceBullet(new Point(200, 400),
                     new TextureRegion((Texture) thsss.manager.get("Image/Bullet/bullet-8.png"), 0, 17, 16, 16),
                     thsss
             );
-            bulletTest.radius = 10;
+          //  bulletTest.radius = 3;
+            bulletTest.setHeight(16);
+            bulletTest.setWidth(16);
+        //    System.out.println(bulletTest.getHeight());
+        //    System.out.println(bulletTest.getHeight());
             bulletTest.moveFunction = new LineMove((Math.random() - 0.5) * 100, Math.min((Math.random() - 0.5) * 100 - 50, -20), bulletTest.initPosition);
+         //   bulletTest.moveFunction = new LineMove(-0,-0.1,bulletTest.initPosition);
             addActor(bulletTest);
             actorArray.add(bulletTest);
         }
