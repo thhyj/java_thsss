@@ -146,4 +146,5 @@ public class Character extends Actor {
     public double getRadius() {
         return radius;
     }
+
 }

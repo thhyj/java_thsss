@@ -13,12 +13,14 @@ import com.badlogic.gdx.utils.viewport.FillViewport;
 import com.badlogic.gdx.utils.viewport.ScalingViewport;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import thsss.MoveMethod.LineMove;
+import thsss.actors.InterFace;
 
 import java.util.ArrayList;
 
 public class GameStage extends Stage {
     private Thsss thsss;
     public Character character;
+    public InterFace interFace;
     public static final int mainStageWidth = 385;
     public static final int mainStageHeight = 450;
     public static final int mainStageX = 35;
@@ -37,6 +39,7 @@ public class GameStage extends Stage {
                     new TextureRegion((Texture) thsss.manager.get("Image/Bullet/bullet-8.png"), 0, 17, 16, 16),
                     thsss
             );
+            bulletTest.radius = 10;
             bulletTest.moveFunction = new LineMove((Math.random() - 0.5) * 100, Math.min((Math.random() - 0.5) * 100 - 50, -20), bulletTest.initPosition);
             addActor(bulletTest);
             actorArray.add(bulletTest);
@@ -48,10 +51,16 @@ public class GameStage extends Stage {
         //Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         actorArray = new Array<Actor>();
         character = new Character(thsss);
+        interFace = new InterFace(thsss);
+        interFace.setZIndex(100);
+        character.setZIndex(0);
         addActor(character);
+        addActor(interFace);
         createBullets();
         for(Actor a:actorArray) {
+            a.setZIndex(1);
             addActor(a);
+
        //     actorArray.removeValue(a, true);
         }
     }

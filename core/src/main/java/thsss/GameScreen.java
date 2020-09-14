@@ -3,7 +3,9 @@ package thsss;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.ScreenAdapter;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -17,6 +19,7 @@ import static java.lang.Thread.sleep;
 
 public class GameScreen extends ScreenAdapter {
     private Thsss thsss;
+    private Sound missSound;
     public GameStage gameStage;
     public SpriteBatch batch;
     private BitmapFont font;
@@ -24,18 +27,41 @@ public class GameScreen extends ScreenAdapter {
     public int FPS;
     private int nowFPS;
     private long lastFPS;
+    public int life;
+    public int bomb;
+    public int border;
+    public boolean hit;
     private GameInputListener gameInputListener;
     public GameScreen(Thsss thsss){
         this.thsss = thsss;
         init();
     }
+
+    private void load() {
+
+    }
+
     private void init() {
+        load();
+        life = 3;
+        bomb = 3;
+        border = 0;
+        missSound = thsss.manager.get("Sound/se_pldead00.wav");
         gameStage = new GameStage(thsss);
         batch = new SpriteBatch();
      //   gameInputListener = new GameInputListener(thsss);
      //   gameStage.addListener(gameInputListener);
         Gdx.input.setInputProcessor(gameStage);
         font = new BitmapFont();
+    }
+    private void miss() {
+        System.out.println("miss");
+        missSound.play();
+        life -= 1;
+        bomb = 3;
+        if(life == 0) {
+            pause();
+        }
     }
     private void characterMove() {
         if(Gdx.input.isKeyPressed(Keys.SHIFT_LEFT)) {
@@ -113,11 +139,22 @@ public class GameScreen extends ScreenAdapter {
         gameStage.draw();
         font.draw(batch, "FPS:"+FPS, 50, 50);
         batch.end();
+        if(hit) {
+            miss();
+            hit = false;
+        }
       /*  for(Actor a: gameStage.actorArray){
             if(checkDelete(a)) {
                 a.remove();
             }
         }*/
-       sleep(60);
+       //sleep(60);
+    }
+    @Override
+    public void dispose() {
+        missSound.dispose();
+        gameStage.dispose();
+        batch.dispose();
+        font.dispose();
     }
 }

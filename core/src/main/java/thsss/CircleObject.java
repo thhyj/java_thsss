@@ -16,7 +16,7 @@ public class CircleObject extends Actor {
     public MoveFunction moveFunction;
     protected double existTime;
     protected double angle, tempAngle;
-    protected  boolean damage;
+    protected  boolean damage = true;
     public CircleObject(Thsss thsss) {
         this.thsss = thsss;
     }
@@ -48,7 +48,7 @@ public class CircleObject extends Actor {
     }
     protected boolean checkHit() {
         if(damage) {
-            return nowPosition.getdis(thsss.gameScreen.gameStage.character.getPosition()) >
+            return nowPosition.getdis(thsss.gameScreen.gameStage.character.getPosition()) <
                     radius + thsss.gameScreen.gameStage.character.getRadius();
         }
         return false;
@@ -63,7 +63,7 @@ public class CircleObject extends Actor {
         existTime += delta;
         move();
         getAngle();
-        checkHit();
+        thsss.gameScreen.hit = checkHit();
         checkDispose();
     }
 
