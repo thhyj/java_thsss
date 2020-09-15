@@ -6,6 +6,7 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 
 
 /** {@link com.badlogic.gdx.ApplicationListener} implementation shared by all platforms. */
@@ -16,12 +17,19 @@ public class Thsss extends Game {
     //1:Up, 2:Right, 3:Down, 4:Left, 5:RightUp, 6:RightDownm, 7:LeftDown, 8:LeftUp;
     public int moveStatus;
     public boolean lowSpeed;
-
+    public long highestScore = 9919260817l;
+    public long score = 1219260817l;
+    public int borderType = 2;
+    public float borderPercent = 0.7f;
     @Override
     public void create() {
         manager = new AssetManager();
     //    Sa = new Texture();
    //     Sa = new Texture(Gdx.files.internal("Sanae.png"));
+
+
+        manager.load("Image/Font/Font_Num.png", Texture.class);
+        manager.load("Font/Score.fnt", BitmapFont.class);
         manager.load("Image/point.png",Texture.class);
         manager.load("Image/MyPlane/Center.png", Texture.class);
         manager.load("Image/MyPlane/Sanae.png", Texture.class);
