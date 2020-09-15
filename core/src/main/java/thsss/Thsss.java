@@ -4,6 +4,7 @@ import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -26,8 +27,9 @@ public class Thsss extends Game {
         manager = new AssetManager();
     //    Sa = new Texture();
    //     Sa = new Texture(Gdx.files.internal("Sanae.png"));
-
-
+        manager.load("Image/Boss/BossSeiryuu.png", Texture.class);
+        manager.load("BGM/Boss03.wav", Music.class);
+        manager.load("Sound/se_graze.wav", Sound.class);
         manager.load("Image/Font/Font_Num.png", Texture.class);
         manager.load("Font/Score.fnt", BitmapFont.class);
         manager.load("Image/point.png",Texture.class);

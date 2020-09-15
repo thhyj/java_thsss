@@ -1,13 +1,15 @@
-thsss/Point.java
- thsss.Point
 thsss/MoveFunction.java
  thsss.MoveFunction
+thsss/Point.java
+ thsss.Point
 thsss/MoveMethod/LineMove.java
  thsss.MoveMethod.LineMove
-thsss/Enemy.java
- thsss.Enemy
+thsss/enemys/Enemy.java
+ thsss.enemys.Enemy
 thsss/Thsss.java
  thsss.Thsss
+thsss/enemys/Boss.java
+ thsss.enemys.Boss
 thsss/GameStage.java
  thsss.GameStage
 thsss/GameInputListener.java
@@ -20,5 +22,7 @@ thsss/CircleObject.java
  thsss.CircleObject
 thsss/Character.java
  thsss.Character
+thsss/enemys/Boss03.java
+ thsss.enemys.Boss03
 thsss/GameScreen.java
  thsss.GameScreen

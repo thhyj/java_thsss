@@ -9,7 +9,7 @@ public class LineMove extends MoveFunction {
     public LineMove(double a, double b, Point initPosition) {
         this.a = a;
         this.b = b;
-        this.initPosition = initPosition;
+        this.initPosition = new Point(initPosition);
     }
     @Override
     public Point getPosition(double t) {

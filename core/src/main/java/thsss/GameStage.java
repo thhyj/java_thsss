@@ -1,6 +1,7 @@
 package thsss;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -15,6 +16,7 @@ import com.badlogic.gdx.utils.viewport.StretchViewport;
 import thsss.MoveMethod.LineMove;
 import thsss.actors.InterFace;
 import thsss.bullets.RiceBullet;
+import thsss.enemys.Boss03;
 
 import java.util.ArrayList;
 
@@ -22,11 +24,12 @@ public class GameStage extends Stage {
     private Thsss thsss;
     public Character character;
     public InterFace interFace;
+    public Boss03 boss03;
     public static final int mainStageWidth = 385;
     public static final int mainStageHeight = 450;
     public static final int mainStageX = 35;
     public static final int MainStageY = 15;
-
+    private Music bgm;
     public Array<Actor> actorArray;
     public GameStage(Thsss thsss){
         //super(new FillViewport(385,450));
@@ -53,14 +56,19 @@ public class GameStage extends Stage {
 
     }
     private void init() {
+        bgm = thsss.manager.get("BGM/Boss03.wav");
+        bgm.play();
         //Gdx.gl.glClearColor(1,1,1,1);
         //Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         actorArray = new Array<Actor>();
         character = new Character(thsss);
         interFace = new InterFace(thsss);
+        boss03 = new Boss03(thsss, new Point(200, 300));
+
         interFace.setZIndex(100);
         character.setZIndex(0);
         addActor(character);
+        addActor(boss03);
         addActor(interFace);
         createBullets();
         for(Actor a:actorArray) {

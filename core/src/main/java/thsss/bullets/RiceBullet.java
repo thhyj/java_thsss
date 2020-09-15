@@ -6,8 +6,8 @@ import thsss.Point;
 import thsss.Thsss;
 
 public class RiceBullet extends CircleObject {
-    public RiceBullet (Thsss thsss) {
-        super(thsss);
+    public RiceBullet (Thsss thsss, Point point) {
+        super(thsss, point);
     }
     public RiceBullet(Point point, TextureRegion img, Thsss thsss) {
         super(point, img, thsss);
