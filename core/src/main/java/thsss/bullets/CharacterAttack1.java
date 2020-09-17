@@ -2,25 +2,33 @@ package thsss.bullets;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import thsss.CircleObject;
-import thsss.MoveFunction;
+import thsss.*;
 import thsss.MoveMethod.LineMove;
-import thsss.Point;
-import thsss.Thsss;
 import thsss.enemys.Enemy;
 
-public class CharacterAttack extends CircleObject {
+public class CharacterAttack1 extends CircleObject {
     private int hitDamage;
-    CharacterAttack(Point point, TextureRegion img, Thsss thsss) {
-        super(point, img, thsss);
+
+    private SubPlane subPlane;
+    public CharacterAttack1(Thsss thsss, Point point, SubPlane subPlane) {
+        super(thsss, point);
+        this.subPlane = subPlane;
+        image = new TextureRegion((Texture) thsss.manager.get("Image/MyPlane/Sanae.png"), 0, 184, 64, 16);
+        appearance = new Sprite(image);
         init();
     }
     private void init() {
-        this.setHeight(32);
-        this.setWidth(32);
-        radius = 16;
+       // appearance.rotate90(false);
+        appearance.setRotation(90.0f);
+        appearance.setAlpha(0.6f);
+        this.setHeight(64);
+        this.setWidth(16);
+        this.moveFunction = new LineMove(0, 1500, initPosition);
+        radius = 32;
+        hitDamage = 10;
     }
     @Override
     protected boolean checkHit() {
@@ -50,10 +58,11 @@ public class CharacterAttack extends CircleObject {
 
         checkDispose();
         updateCheckPointPosition();
+        appearance.setPosition((float) nowPosition.x - 24, (float)nowPosition.y);
     }
 
     @Override
     public void draw(Batch batch, float delta) {
-        super.draw(batch, delta);
+        appearance.draw(batch);
     }
 }

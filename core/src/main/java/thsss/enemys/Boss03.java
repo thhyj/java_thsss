@@ -1,6 +1,7 @@
 package thsss.enemys;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import thsss.MoveMethod.LineMove;
 import thsss.Point;
@@ -15,6 +16,8 @@ public class Boss03 extends Boss{
     }
     private void init() {
         XiaQingliu = thsss.manager.get("Image/Boss/BossSeiryuu.png");
+        setWidth(64);
+        setHeight(80);
         for(int i = 0; i < 4; ++i) {
             staying.add(new TextureRegion(XiaQingliu, 64*i,0,64,80));
         }
@@ -30,5 +33,23 @@ public class Boss03 extends Boss{
             shooting.add(new TextureRegion(XiaQingliu, 64 * i, 160, 64, 80));
         }
         moveFunction = new LineMove(0 ,0, initPosition);
+        hp = 1000;
+    }
+
+    @Override
+    public void act(float delta) {
+        super.act(delta);
+        if(hp <= 0) {
+            this.remove();
+        }
+    }
+
+    @Override
+    public void draw(Batch batch, float delta) {
+        super.draw(batch, delta);
+        batch.draw(point, (float) checkPointPosition.x, (float)checkPointPosition.y);
+     //   System.out.println(getWidth());
+     //   System.out.println(getHeight());
+     //   batch.draw(point, (float) nowPosition.x + getWidth() / 2, (float)nowPosition.y + getHeight()/ 2);
     }
 }

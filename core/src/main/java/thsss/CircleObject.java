@@ -12,7 +12,7 @@ import com.badlogic.gdx.utils.Array;
 public class CircleObject extends Actor {
     protected Thsss thsss;
     protected Point initPosition, nowPosition, lastPosition,checkPointPosition, temp;
-   // private Texture point;
+    protected Texture point;
     protected Sprite appearance;
     protected TextureRegion image;
     public double radius;
@@ -24,6 +24,8 @@ public class CircleObject extends Actor {
     private Sound grazeSound;
 
     public CircleObject(Thsss thsss, Point point) {
+        this.point = thsss.manager.get("Image/point.png", Texture.class);
+
         this.thsss = thsss;
         this.initPosition = new Point(point);
         this.nowPosition = new Point(this.initPosition);
@@ -32,7 +34,7 @@ public class CircleObject extends Actor {
         grazeSound = thsss.manager.get("Sound/se_graze.wav");
     }
     public CircleObject(Point point, TextureRegion img, Thsss thsss) {
-     //   this.point = thsss.manager.get("Image/point.png", Texture.class);
+        this.point = thsss.manager.get("Image/point.png", Texture.class);
         this.thsss = thsss;
         this.initPosition = point;
         this.nowPosition = new Point(this.initPosition);

@@ -18,6 +18,7 @@ public class Thsss extends Game {
     //1:Up, 2:Right, 3:Down, 4:Left, 5:RightUp, 6:RightDownm, 7:LeftDown, 8:LeftUp;
     public int moveStatus;
     public boolean lowSpeed;
+    public boolean fire;
     public long highestScore = 9919260817l;
     public long score = 1219260817l;
     public int borderType = 2;

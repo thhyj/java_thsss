@@ -73,6 +73,7 @@ public class GameScreen extends ScreenAdapter {
         } else {
             thsss.lowSpeed = false;
         }
+
         if(Gdx.input.isKeyPressed(Keys.UP) && Gdx.input.isKeyPressed(Keys.RIGHT)) {
             thsss.moveStatus = 5;
         } else {
