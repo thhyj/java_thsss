@@ -32,13 +32,18 @@ public class Character extends Actor {
     public boolean reborning = false;
     public long lastLostControlTime;
     public boolean visible = true;
+    public int power = 100;
+    public int powerStatus = 1;
+    private boolean isInit = false;
+
+    public Array<SubPlane> subPlanes;
     public Character(Thsss thsss) {
         this.thsss = thsss;
         characterX= 40;
         characterY = 20;
         this.setX(40);
         this.setY(20);
-        this.init();
+       // this.init();
     }
     private int getMoveStatus() {
         return thsss.moveStatus;
@@ -53,7 +58,25 @@ public class Character extends Actor {
                 Sanae[i][j] = new TextureRegion(Sa, 32 * j, 48 * i,32, 48);
             }
         }
+        power = 100;
+        subPlanes = new Array<SubPlane>();
+        createSubPlane(1);
     }
+
+    private void createSubPlane(int type) {
+        SubPlane temp = new SubPlane(thsss, type);
+
+        subPlanes.add(temp);
+        thsss.gameScreen.gameStage.addActor(temp);
+
+        temp.setZIndex(2);
+    }
+
+    /*private void updateSubPlane(float delta) {
+        for(SubPlane a:subPlanes) {
+            a.updatePosition(delta);
+        }
+    }*/
 
     public void reborn() {
         unbreakable = true;
@@ -73,8 +96,14 @@ public class Character extends Actor {
         checkPointY = characterY + 24;
     }
 
+
+
     @Override
     public void act(float delta){
+        if(!isInit) {
+            isInit = true;
+            init();
+        }
         int speed = thsss.lowSpeed ? 120:270;
         int sqrtSpeed = thsss.lowSpeed?lowSqrt270:sqrt270;
         ++totFrame;
@@ -188,6 +217,7 @@ public class Character extends Actor {
         preSanaeType = sanaeType;
       //  System.out.println("acting");
         updateCheckPoint();
+
     }
     @Override
     public void draw(Batch batch, float delta) {

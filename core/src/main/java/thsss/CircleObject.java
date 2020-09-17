@@ -15,7 +15,7 @@ public class CircleObject extends Actor {
    // private Texture point;
     protected Sprite appearance;
     protected TextureRegion image;
-    protected double radius;
+    public double radius;
     public MoveFunction moveFunction;
     protected double existTime;
     protected double angle, tempAngle;
@@ -51,7 +51,7 @@ public class CircleObject extends Actor {
 
     }
 
-    private void updateCheckPointPosition() {
+    protected void updateCheckPointPosition() {
         checkPointPosition.x = nowPosition.x + getWidth() / 2;
 
         checkPointPosition.y = nowPosition.y + getHeight() / 2;

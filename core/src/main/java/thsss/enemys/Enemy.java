@@ -16,5 +16,7 @@ public class Enemy extends CircleObject {
         super(point, img, thsss);
 
     }
-
+    public Point getCheckPosition() {
+        return checkPointPosition;
+    }
 }

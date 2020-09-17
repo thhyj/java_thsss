@@ -1,25 +1,29 @@
 thsss/MoveFunction.java
  thsss.MoveFunction
-thsss/Point.java
- thsss.Point
-thsss/MoveMethod/LineMove.java
- thsss.MoveMethod.LineMove
 thsss/enemys/Enemy.java
  thsss.enemys.Enemy
-thsss/Thsss.java
- thsss.Thsss
 thsss/enemys/Boss.java
  thsss.enemys.Boss
 thsss/GameStage.java
  thsss.GameStage
-thsss/GameInputListener.java
- thsss.GameInputListener
-thsss/bullets/RiceBullet.java
- thsss.bullets.RiceBullet
+thsss/Point.java
+ thsss.Point
 thsss/actors/InterFace.java
  thsss.actors.InterFace
 thsss/CircleObject.java
  thsss.CircleObject
+thsss/MoveMethod/LineMove.java
+ thsss.MoveMethod.LineMove
+thsss/Thsss.java
+ thsss.Thsss
+thsss/GameInputListener.java
+ thsss.GameInputListener
+thsss/SubPlane.java
+ thsss.SubPlane
+thsss/bullets/RiceBullet.java
+ thsss.bullets.RiceBullet
+thsss/bullets/CharacterAttack.java
+ thsss.bullets.CharacterAttack
 thsss/Character.java
  thsss.Character
 thsss/enemys/Boss03.java

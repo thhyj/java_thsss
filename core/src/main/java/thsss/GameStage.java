@@ -17,6 +17,7 @@ import thsss.MoveMethod.LineMove;
 import thsss.actors.InterFace;
 import thsss.bullets.RiceBullet;
 import thsss.enemys.Boss03;
+import thsss.enemys.Enemy;
 
 import java.util.ArrayList;
 
@@ -31,6 +32,7 @@ public class GameStage extends Stage {
     public static final int MainStageY = 15;
     private Music bgm;
     public Array<Actor> actorArray;
+    public Array<Enemy> enemyArray;
     public GameStage(Thsss thsss){
         //super(new FillViewport(385,450));
         this.thsss = thsss;
@@ -64,17 +66,20 @@ public class GameStage extends Stage {
         character = new Character(thsss);
         interFace = new InterFace(thsss);
         boss03 = new Boss03(thsss, new Point(200, 300));
-
-        interFace.setZIndex(100);
-        character.setZIndex(0);
+        enemyArray = new Array<Enemy>();
         addActor(character);
         addActor(boss03);
         addActor(interFace);
+        interFace.setZIndex(100);
+        character.setZIndex(1);
+        boss03.setZIndex(0);
+        enemyArray.add(boss03);
+
         createBullets();
         for(Actor a:actorArray) {
-            a.setZIndex(1);
-            addActor(a);
 
+            addActor(a);
+            a.setZIndex(20);
        //     actorArray.removeValue(a, true);
         }
     }
