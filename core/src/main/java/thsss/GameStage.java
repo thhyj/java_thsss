@@ -37,8 +37,9 @@ public class GameStage extends Stage {
         //super(new FillViewport(385,450));
         this.thsss = thsss;
 
-        init();
+
     }
+
     private void createBullets() {
         for(int i = 1; i <= 100; ++i) {
             RiceBullet bulletTest = (RiceBullet) new RiceBullet(new Point(200, 400),
@@ -57,7 +58,7 @@ public class GameStage extends Stage {
         }
 
     }
-    private void init() {
+    public void init() {
         bgm = thsss.manager.get("BGM/Boss03.wav");
         bgm.play();
         //Gdx.gl.glClearColor(1,1,1,1);
@@ -75,7 +76,7 @@ public class GameStage extends Stage {
         boss03.setZIndex(0);
         enemyArray.add(boss03);
 
-        createBullets();
+       // createBullets();
         for(Actor a:actorArray) {
 
             addActor(a);

@@ -5,7 +5,10 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import thsss.MoveMethod.LineMove;
 import thsss.Point;
+import thsss.SpellCard.SpellCard;
+import thsss.SpellCard.TestSpell;
 import thsss.Thsss;
+import com.badlogic.gdx.utils.Array;
 
 public class Boss03 extends Boss{
     private Texture XiaQingliu;
@@ -33,15 +36,19 @@ public class Boss03 extends Boss{
             shooting.add(new TextureRegion(XiaQingliu, 64 * i, 160, 64, 80));
         }
         moveFunction = new LineMove(0 ,0, initPosition);
-        hp = 1000;
+        TestSpell testSpell = new TestSpell(this, 1000);
+        spellCardEnd = false;
+        spellCards.add(testSpell);
+        testSpell.begin();
     }
+
+
+
 
     @Override
     public void act(float delta) {
         super.act(delta);
-        if(hp <= 0) {
-            this.remove();
-        }
+
     }
 
     @Override

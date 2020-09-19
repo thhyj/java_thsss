@@ -5,18 +5,22 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.TimeUtils;
 import thsss.Point;
+import thsss.SpellCard.SpellCard;
 import thsss.Thsss;
 
 public class Boss extends Enemy{
     private long lastChangeTime;
     protected int moveStatus, showStatus;
     static private final long changeTime = 200000000l;
+    public  Array<SpellCard> spellCards;
+    public int nowSpell;
     public Boss(Thsss thsss, Point point) {
         super(thsss, point);
         staying = new Array<TextureRegion>();
         movingRight = new Array<TextureRegion>();
         movingLeft = new Array<TextureRegion>();
         shooting = new Array<TextureRegion>();
+        spellCards = new Array<SpellCard>();
     }
     Array<TextureRegion>staying, movingLeft, movingRight, shooting;
 
@@ -63,6 +67,24 @@ public class Boss extends Enemy{
         }
         batch.draw(shooting.get(showStatus), (float) nowPosition.x, (float) nowPosition.y);
     }
+    public void defeated() {
+        remove();
+    }
+    @Override
+    public void act(float delta) {
+        super.act(delta);
+        if(hp <= 0) {
+            spellCardEnd = true;
+            spellCards.get(nowSpell).end();
+            ++nowSpell;
+            if(nowSpell >= spellCards.size) {
+                this.defeated();
+            } else {
+                spellCards.get(nowSpell).begin();
+            }
+        }
+    }
+
     @Override
     public void draw(Batch batch, float delta) {
         switch (moveStatus) {

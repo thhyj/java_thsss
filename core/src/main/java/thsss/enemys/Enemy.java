@@ -9,6 +9,7 @@ import thsss.Thsss;
 public class Enemy extends CircleObject {
     public boolean ableToDamage;
     public int hp;
+    public boolean spellCardEnd;
     public Enemy (Thsss thsss, Point point) {
         super(thsss, point);
     }

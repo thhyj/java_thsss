@@ -42,6 +42,7 @@ public class Thsss extends Game {
         manager.load("Image/Interface/Interface.png", Texture.class);
         manager.finishLoading();
         gameScreen = new GameScreen(this);
+        gameScreen.init();
         setScreen(gameScreen);
     }
 

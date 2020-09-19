@@ -34,20 +34,21 @@ public class GameScreen extends ScreenAdapter {
     private GameInputListener gameInputListener;
     public GameScreen(Thsss thsss){
         this.thsss = thsss;
-        init();
+
     }
 
     private void load() {
 
     }
 
-    private void init() {
+    public void init() {
         load();
         life = 3;
         bomb = 3;
         border = 0;
         missSound = thsss.manager.get("Sound/se_pldead00.wav");
         gameStage = new GameStage(thsss);
+        gameStage.init();
         batch = new SpriteBatch();
      //   gameInputListener = new GameInputListener(thsss);
      //   gameStage.addListener(gameInputListener);

@@ -10,8 +10,8 @@ import com.badlogic.gdx.utils.Array;
 
 //CircleObject means Objects who's collision boxes are a circle.
 public class CircleObject extends Actor {
-    protected Thsss thsss;
-    protected Point initPosition, nowPosition, lastPosition,checkPointPosition, temp;
+    public Thsss thsss;
+    public Point initPosition, nowPosition, lastPosition,checkPointPosition, temp;
     protected Texture point;
     protected Sprite appearance;
     protected TextureRegion image;
@@ -88,9 +88,14 @@ public class CircleObject extends Actor {
         }
         return false;
     }
+
+    public void dispose() {
+        remove();
+    }
+
     public void checkDispose() {
         if(nowPosition.x < 0 || nowPosition.y < 0 || nowPosition.x > 500 || nowPosition.y > 500 ){
-            this.remove();
+            this.dispose();
         }
     }
     @Override
