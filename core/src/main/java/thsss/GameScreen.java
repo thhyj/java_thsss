@@ -32,6 +32,7 @@ public class GameScreen extends ScreenAdapter {
     public int border;
     public boolean hit;
     private GameInputListener gameInputListener;
+    public float delta;
     public GameScreen(Thsss thsss){
         this.thsss = thsss;
 
@@ -137,6 +138,7 @@ public class GameScreen extends ScreenAdapter {
             nowFPS = 0;
         }
    //     Gdx.gl.glClearColor(1,1,1,1);
+        this.delta = delta;
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         characterMove();
         ++nowFPS;

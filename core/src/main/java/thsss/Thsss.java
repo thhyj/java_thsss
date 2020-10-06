@@ -8,6 +8,7 @@ import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 
 
 /** {@link com.badlogic.gdx.ApplicationListener} implementation shared by all platforms. */
@@ -28,6 +29,7 @@ public class Thsss extends Game {
         manager = new AssetManager();
     //    Sa = new Texture();
    //     Sa = new Texture(Gdx.files.internal("Sanae.png"));
+        manager.load("Image/Effect/Graze/Graze", ParticleEffect.class);
         manager.load("Image/Boss/BossSeiryuu.png", Texture.class);
         manager.load("BGM/Boss03.wav", Music.class);
         manager.load("Sound/se_graze.wav", Sound.class);

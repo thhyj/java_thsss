@@ -7,6 +7,8 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.Array;
+import thsss.effects.GrazeEffect;
+import thsss.effects.MyParticleEffect;
 
 //CircleObject means Objects who's collision boxes are a circle.
 public class CircleObject extends Actor {
@@ -20,8 +22,12 @@ public class CircleObject extends Actor {
     protected double existTime;
     protected double angle, tempAngle;
     protected  boolean damage = true;
+    protected boolean destructible = true;
     private boolean grazed = false;
     private Sound grazeSound;
+    protected MyParticleEffect grazeEffect;
+    protected boolean isJustGrazed = true;
+    protected float lastGrazedTime = 0;
 
     public CircleObject(Thsss thsss, Point point) {
         this.point = thsss.manager.get("Image/point.png", Texture.class);
@@ -78,7 +84,12 @@ public class CircleObject extends Actor {
             double dis = checkPointPosition.getdis(thsss.gameScreen.gameStage.character.getCheckPosition());
             if((!grazed) &&dis < 15) {
                 grazed = true;
+
                 grazeSound.play(0.3f);
+                thsss.gameScreen.gameStage.addActor(new MyParticleEffect(thsss,new GrazeEffect(thsss), 1.0f,
+                        thsss.gameScreen.gameStage.character.getX()+16.0f,
+                        thsss.gameScreen.gameStage.character.getY()+16.0f));
+                thsss.score += 100;
             }
             if(checkPointPosition.getdis(thsss.gameScreen.gameStage.character.getCheckPosition())<
                     radius + thsss.gameScreen.gameStage.character.getRadius()){
@@ -89,7 +100,12 @@ public class CircleObject extends Actor {
         return false;
     }
 
+    public void endBullet() {
+
+    }
+
     public void dispose() {
+        endBullet();
         remove();
     }
 
@@ -117,6 +133,20 @@ public class CircleObject extends Actor {
         appearance.setPosition((float)nowPosition.x, (float)nowPosition.y);
         appearance.setRotation((float)angle);
         appearance.draw(batch);
+        if(grazed) {
+            lastGrazedTime += thsss.gameScreen.delta;
+            if(lastGrazedTime > 1.0f) {
+                lastGrazedTime = 0;
+                grazed = false;
+            }
+        }
+      /*  if(grazed && isJustGrazed) {
+            lastGrazedTime += thsss.gameScreen.delta;
+            if(lastGrazedTime > 1f)
+                isJustGrazed = false;
+            grazeEffect.setPosition();
+            grazeEffect.draw(batch, thsss.gameScreen.delta);
+        }*/
      //   batch.draw(point, (float)checkPointPosition.x, (float)checkPointPosition.y);
     }
     @Override

@@ -8,20 +8,24 @@ thsss/bullets/CharacterAttack1.java
  thsss.bullets.CharacterAttack1
 thsss/enemys/Enemy.java
  thsss.enemys.Enemy
-thsss/enemys/Boss03.java
- thsss.enemys.Boss03
+thsss/enemys/Boss.java
+ thsss.enemys.Boss
 thsss/GameStage.java
  thsss.GameStage
 thsss/actors/InterFace.java
  thsss.actors.InterFace
 thsss/CircleObject.java
  thsss.CircleObject
-thsss/Character.java
- thsss.Character
+thsss/SpellCard/SpellCard.java
+ thsss.SpellCard.SpellCard
 thsss/bullets/CharacterAttack3.java
  thsss.bullets.CharacterAttack3
-thsss/GameScreen.java
- thsss.GameScreen
+thsss/effects/GrazeEffect.java
+ thsss.effects.GrazeEffect
+thsss/SpellCard/TestSpell.java
+ thsss.SpellCard.TestSpell
+thsss/effects/MyParticleEffect.java
+ thsss.effects.MyParticleEffect
 thsss/Thsss.java
  thsss.Thsss
 thsss/GameInputListener.java
@@ -32,9 +36,9 @@ thsss/SubPlane.java
  thsss.SubPlane
 thsss/bullets/RiceBullet.java
  thsss.bullets.RiceBullet
-thsss/SpellCard/TestSpell.java
- thsss.SpellCard.TestSpell
-thsss/enemys/Boss.java
- thsss.enemys.Boss
-thsss/SpellCard/SpellCard.java
- thsss.SpellCard.SpellCard
+thsss/Character.java
+ thsss.Character
+thsss/enemys/Boss03.java
+ thsss.enemys.Boss03
+thsss/GameScreen.java
+ thsss.GameScreen
