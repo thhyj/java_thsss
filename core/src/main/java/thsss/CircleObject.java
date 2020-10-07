@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.Array;
+import thsss.effects.BulletEndEffect;
 import thsss.effects.GrazeEffect;
 import thsss.effects.MyParticleEffect;
 
@@ -29,6 +30,10 @@ public class CircleObject extends Actor {
     protected boolean isJustGrazed = true;
     protected float lastGrazedTime = 0;
 
+    private void init() {
+     //   appearance.setColor(0f, 1.0f, 0f, 0.8f);
+    }
+
     public CircleObject(Thsss thsss, Point point) {
         this.point = thsss.manager.get("Image/point.png", Texture.class);
 
@@ -38,6 +43,7 @@ public class CircleObject extends Actor {
         this.checkPointPosition = new Point(this.nowPosition);
         damage = true;
         grazeSound = thsss.manager.get("Sound/se_graze.wav");
+      //  init();
     }
     public CircleObject(Point point, TextureRegion img, Thsss thsss) {
         this.point = thsss.manager.get("Image/point.png", Texture.class);
@@ -50,6 +56,8 @@ public class CircleObject extends Actor {
         appearance = new Sprite(this.image);
         damage = true;
         grazeSound = thsss.manager.get("Sound/se_graze.wav");
+        init();
+
     }
     protected void move() {
         lastPosition = nowPosition;
@@ -101,17 +109,20 @@ public class CircleObject extends Actor {
     }
 
     public void endBullet() {
+        thsss.gameScreen.gameStage.addActor(new BulletEndEffect(thsss, (float)checkPointPosition.x,
+                (float) checkPointPosition.y, appearance.getColor()));
 
     }
 
-    public void dispose() {
+    public boolean dispose() {
         endBullet();
         remove();
+        return true;
     }
 
     public void checkDispose() {
         if(nowPosition.x < 0 || nowPosition.y < 0 || nowPosition.x > 500 || nowPosition.y > 500 ){
-            this.dispose();
+            this.remove();
         }
     }
     @Override
@@ -119,7 +130,7 @@ public class CircleObject extends Actor {
         existTime += delta;
         move();
         getAngle();
-        thsss.gameScreen.hit |= checkHit() && this.remove();
+        thsss.gameScreen.hit |= checkHit() && this.dispose();
 
         checkDispose();
         updateCheckPointPosition();
@@ -133,6 +144,7 @@ public class CircleObject extends Actor {
         appearance.setPosition((float)nowPosition.x, (float)nowPosition.y);
         appearance.setRotation((float)angle);
         appearance.draw(batch);
+
         if(grazed) {
             lastGrazedTime += thsss.gameScreen.delta;
             if(lastGrazedTime > 1.0f) {

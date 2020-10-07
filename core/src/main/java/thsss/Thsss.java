@@ -29,6 +29,9 @@ public class Thsss extends Game {
         manager = new AssetManager();
     //    Sa = new Texture();
    //     Sa = new Texture(Gdx.files.internal("Sanae.png"));
+        manager.load("Image/Effect/SmallStar", ParticleEffect.class);
+        manager.load("Image/Effect/SmallStar.png", Texture.class);
+        manager.load("Image/Effect/EndBullet.png", Texture.class);
         manager.load("Image/Effect/Graze/Graze", ParticleEffect.class);
         manager.load("Image/Boss/BossSeiryuu.png", Texture.class);
         manager.load("BGM/Boss03.wav", Music.class);
