@@ -2,6 +2,7 @@ package thsss;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -28,6 +29,7 @@ public class SubPlane extends Actor {
     static private final int distance = 16;
     private double lastY;
     private long lastCreateBulletTime;
+    protected Sound bulletShoot;
     SubPlane(Thsss thsss, int type) {
         this.thsss = thsss;
         this.type = type;
@@ -35,6 +37,7 @@ public class SubPlane extends Actor {
         position = new Point(0, 0);
         highSpeedPosition = new Point(0, 0);
         lowSpeedPosition = new Point(0, 0);
+        bulletShoot = thsss.manager.get("Sound/se_plst00.mp3");
         switch (type) {
             case 1:
                 //highSpeedPosition = new Point(thsss.gameScreen.gameStage.character.getCheckPosition());
@@ -119,6 +122,7 @@ public class SubPlane extends Actor {
 
     private void createSubBullet() {
         if(Gdx.input.isKeyPressed(54)&&TimeUtils.nanoTime() - lastCreateBulletTime> 70000000) {
+            bulletShoot.play();
             //System.out.println("created!");
             lastCreateBulletTime = TimeUtils.nanoTime();
             CharacterAttack1 attack1Left = new CharacterAttack1(thsss,

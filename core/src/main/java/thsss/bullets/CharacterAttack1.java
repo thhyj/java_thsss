@@ -10,7 +10,6 @@ import thsss.MoveMethod.LineMove;
 import thsss.enemys.Enemy;
 
 public class CharacterAttack1 extends CircleObject {
-    private int hitDamage;
 
     private SubPlane subPlane;
     public CharacterAttack1(Thsss thsss, Point point, SubPlane subPlane) {
@@ -35,7 +34,7 @@ public class CharacterAttack1 extends CircleObject {
         for(Enemy a: thsss.gameScreen.gameStage.enemyArray) {
             double dis = checkPointPosition.getdis(new Point(a.getCheckPosition()));
             if(dis <= radius + a.radius) {
-                a.hp -= hitDamage;
+                a.hp -= getHitDamage();
                 return true;
             }
         }

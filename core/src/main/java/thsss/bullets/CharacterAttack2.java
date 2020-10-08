@@ -12,11 +12,13 @@ import thsss.Thsss;
 import thsss.enemys.Enemy;
 
 public class CharacterAttack2 extends CircleObject {
-    private int hitDamage;
     private SubPlane subPlane;
 
     //Left is 0, Mid is 1, Right is 2
     private int type;
+
+
+
     public CharacterAttack2(Thsss thsss, Point point, SubPlane subPlane, int type) {
         super(thsss, point);
         this.subPlane = subPlane;
@@ -55,7 +57,7 @@ public class CharacterAttack2 extends CircleObject {
         for(Enemy a: thsss.gameScreen.gameStage.enemyArray) {
             double dis = checkPointPosition.getdis(new Point(a.getCheckPosition()));
             if(dis <= radius + a.radius) {
-                a.hp -= hitDamage;
+                a.hp -= getHitDamage();
                 return true;
             }
         }

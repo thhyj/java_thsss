@@ -33,6 +33,9 @@ public class GameStage extends Stage {
     private Music bgm;
     public Array<Actor> actorArray;
     public Array<Enemy> enemyArray;
+    public boolean bombing = false;
+    public float damageRatio = 1.0f;
+
     public GameStage(Thsss thsss){
         //super(new FillViewport(385,450));
         this.thsss = thsss;

@@ -67,9 +67,7 @@ public class Boss extends Enemy{
         }
         batch.draw(shooting.get(showStatus), (float) nowPosition.x, (float) nowPosition.y);
     }
-    public void defeated() {
-        remove();
-    }
+
     @Override
     public void act(float delta) {
         super.act(delta);

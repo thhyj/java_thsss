@@ -1,50 +1,52 @@
 thsss/MoveFunction.java
  thsss.MoveFunction
-thsss/enemys/Boss.java
- thsss.enemys.Boss
+thsss/MoveMethod/LineMove.java
+ thsss.MoveMethod.LineMove
 thsss/Point.java
  thsss.Point
-thsss/actors/InterFace.java
- thsss.actors.InterFace
-thsss/item/BulletBody.java
- thsss.item.BulletBody
-thsss/SpellCard/SpellCard.java
- thsss.SpellCard.SpellCard
-thsss/bullets/CharacterAttack3.java
- thsss.bullets.CharacterAttack3
-thsss/SpellCard/TestSpell.java
- thsss.SpellCard.TestSpell
-thsss/Thsss.java
- thsss.Thsss
-thsss/GameInputListener.java
- thsss.GameInputListener
-thsss/bullets/RiceBullet.java
- thsss.bullets.RiceBullet
-thsss/Character.java
- thsss.Character
-thsss/enemys/Boss03.java
- thsss.enemys.Boss03
-thsss/GameScreen.java
- thsss.GameScreen
 thsss/bullets/CharacterAttack1.java
  thsss.bullets.CharacterAttack1
 thsss/enemys/Enemy.java
  thsss.enemys.Enemy
+thsss/enemys/Boss.java
+ thsss.enemys.Boss
 thsss/GameStage.java
  thsss.GameStage
 thsss/item/Item.java
  thsss.item.Item
-thsss/effects/GrazeEffect.java
- thsss.effects.GrazeEffect
-thsss/SubPlane.java
- thsss.SubPlane
-thsss/MoveMethod/LineMove.java
- thsss.MoveMethod.LineMove
-thsss/effects/MyParticleEffect.java
- thsss.effects.MyParticleEffect
-thsss/bullets/CharacterAttack2.java
- thsss.bullets.CharacterAttack2
+thsss/actors/InterFace.java
+ thsss.actors.InterFace
 thsss/CircleObject.java
  thsss.CircleObject
+thsss/SpellCard/SpellCard.java
+ thsss.SpellCard.SpellCard
+thsss/bullets/CharacterAttack3.java
+ thsss.bullets.CharacterAttack3
+thsss/effects/GrazeEffect.java
+ thsss.effects.GrazeEffect
+thsss/item/BulletBody.java
+ thsss.item.BulletBody
+thsss/SpellCard/TestSpell.java
+ thsss.SpellCard.TestSpell
+thsss/effects/MyParticleEffect.java
+ thsss.effects.MyParticleEffect
+thsss/Thsss.java
+ thsss.Thsss
+thsss/GameInputListener.java
+ thsss.GameInputListener
+thsss/bullets/CharacterAttack2.java
+ thsss.bullets.CharacterAttack2
+thsss/SubPlane.java
+ thsss.SubPlane
+thsss/bullets/RiceBullet.java
+ thsss.bullets.RiceBullet
+thsss/Bombs/Bomb.java
+ thsss.Bombs.Bomb
+thsss/Character.java
+ thsss.Character
+thsss/enemys/Boss03.java
+ thsss.enemys.Boss03
 thsss/effects/BulletEndEffect.java
  thsss.effects.BulletEndEffect
+thsss/GameScreen.java
+ thsss.GameScreen

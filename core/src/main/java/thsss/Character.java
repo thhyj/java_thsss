@@ -1,11 +1,15 @@
 package thsss;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.TimeUtils;
+import thsss.Bombs.Bomb;
+
 import java.sql.Time;
 
 
@@ -35,6 +39,7 @@ public class Character extends Actor {
     public int power = 100;
     public int powerStatus = 1;
     private boolean isInit = false;
+    public long lastBombTime = -10000000000000L;
 
     public Array<SubPlane> subPlanes;
     public Character(Thsss thsss) {
@@ -97,6 +102,11 @@ public class Character extends Actor {
     }
 
 
+
+    public void bomb() {
+        thsss.gameScreen.gameStage.addActor(new Bomb(thsss));
+
+    }
 
     @Override
     public void act(float delta){
@@ -174,6 +184,12 @@ public class Character extends Actor {
             if (characterY < 15) {
                 characterY = 15;
             }
+            if(Gdx.input.isKeyPressed(52)&&thsss.gameScreen.gameStage.bombing == false) {
+              //  System.out.println("233");
+                bomb();
+                unbreakable = true;
+                lastHitTime = TimeUtils.nanoTime();
+            }
         } else {
             if(reborning) {
                 characterY += 75 * delta;
@@ -186,8 +202,9 @@ public class Character extends Actor {
               //  System.out.println(checkPointX);
 
             }
+
         }
-        if(TimeUtils.nanoTime() - lastHitTime > 5000000000l) {
+        if(TimeUtils.nanoTime() - lastHitTime > 5000000000L) {
             unbreakable = false;
             visible = true;
         }
@@ -228,7 +245,6 @@ public class Character extends Actor {
             }
         }
         // System.out.println("drawing");
-
     }
     public Point getPosition() {
         return new Point(characterX, characterY);

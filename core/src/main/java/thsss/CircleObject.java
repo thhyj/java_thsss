@@ -11,6 +11,8 @@ import thsss.effects.BulletEndEffect;
 import thsss.effects.GrazeEffect;
 import thsss.effects.MyParticleEffect;
 
+import java.util.SortedSet;
+
 //CircleObject means Objects who's collision boxes are a circle.
 public class CircleObject extends Actor {
     public Thsss thsss;
@@ -29,6 +31,13 @@ public class CircleObject extends Actor {
     protected MyParticleEffect grazeEffect;
     protected boolean isJustGrazed = true;
     protected float lastGrazedTime = 0;
+    protected boolean breakableByBomb = true;
+    public boolean removed = false;
+    protected int hitDamage;
+
+    public int getHitDamage() {
+        return  (int)(hitDamage * thsss.gameScreen.gameStage.damageRatio);
+    }
 
     private void init() {
      //   appearance.setColor(0f, 1.0f, 0f, 0.8f);
@@ -43,7 +52,9 @@ public class CircleObject extends Actor {
         this.checkPointPosition = new Point(this.nowPosition);
         damage = true;
         grazeSound = thsss.manager.get("Sound/se_graze.wav");
-      //  init();
+        appearance = new Sprite();
+
+        //  init();
     }
     public CircleObject(Point point, TextureRegion img, Thsss thsss) {
         this.point = thsss.manager.get("Image/point.png", Texture.class);
@@ -109,14 +120,18 @@ public class CircleObject extends Actor {
     }
 
     public void endBullet() {
+      //  System.out.println(thsss.gameScreen.gameStage);
+     //   System.out.println(appearance);
         thsss.gameScreen.gameStage.addActor(new BulletEndEffect(thsss, (float)checkPointPosition.x,
                 (float) checkPointPosition.y, appearance.getColor()));
 
     }
 
     public boolean dispose() {
-        endBullet();
-        remove();
+        if(this.hasParent()) {
+            endBullet();
+            remove();
+        }
         return true;
     }
 
@@ -131,7 +146,9 @@ public class CircleObject extends Actor {
         move();
         getAngle();
         thsss.gameScreen.hit |= checkHit() && this.dispose();
-
+        if(thsss.gameScreen.gameStage.bombing && breakableByBomb) {
+            dispose();
+        }
         checkDispose();
         updateCheckPointPosition();
     }

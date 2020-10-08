@@ -12,10 +12,19 @@ public class Enemy extends CircleObject {
     public boolean spellCardEnd;
     public Enemy (Thsss thsss, Point point) {
         super(thsss, point);
+     //   thsss.gameScreen.gameStage.enemyArray.add(this);
+        breakableByBomb = false;
     }
     public Enemy (Point point, TextureRegion img, Thsss thsss) {
         super(point, img, thsss);
+     //   thsss.gameScreen.gameStage.enemyArray.add(this);
 
+        breakableByBomb = false;
+
+    }
+    public void defeated() {
+        thsss.gameScreen.gameStage.enemyArray.removeValue(this, false);
+        remove();
     }
     public Point getCheckPosition() {
         return checkPointPosition;
