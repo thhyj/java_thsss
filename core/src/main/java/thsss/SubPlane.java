@@ -131,8 +131,8 @@ public class SubPlane extends Actor {
                     new Point(position.x + 7, position.y), this);
             thsss.gameScreen.gameStage.addActor(attack1Left);
             thsss.gameScreen.gameStage.addActor(attack1Right);
-            attack1Left.setZIndex(4);
-            attack1Right.setZIndex(4);
+            attack1Left.setZIndex(2);
+            attack1Right.setZIndex(2);
             if(thsss.lowSpeed == false) {
             //    System.out.println("created!");
                 CharacterAttack2 attack2Left = new CharacterAttack2(thsss,
@@ -144,9 +144,9 @@ public class SubPlane extends Actor {
                 thsss.gameScreen.gameStage.addActor(attack2Left);
                 thsss.gameScreen.gameStage.addActor(attack2Mid);
                 thsss.gameScreen.gameStage.addActor(attack2Right);
-                attack2Left.setZIndex(4);
-                attack2Mid.setZIndex(4);
-                attack2Right.setZIndex(4);
+                attack2Left.setZIndex(2);
+                attack2Mid.setZIndex(2);
+                attack2Right.setZIndex(2);
 
             } else {
                 if(thsss.lowSpeed == true) {
@@ -156,8 +156,8 @@ public class SubPlane extends Actor {
                             new Point(position.x + 4, position.y), this, 0);
                     thsss.gameScreen.gameStage.addActor(attack3Left);
                     thsss.gameScreen.gameStage.addActor(attack3Right);
-                    attack3Left.setZIndex(4);
-                    attack3Right.setZIndex(4);
+                    attack3Left.setZIndex(2);
+                    attack3Right.setZIndex(2);
                 }
             }
         }

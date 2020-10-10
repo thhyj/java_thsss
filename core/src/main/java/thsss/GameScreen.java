@@ -157,6 +157,7 @@ public class GameScreen extends ScreenAdapter {
             }
         }*/
        //sleep(60);
+       // System.out.println(gameStage.getActors().size);
     }
     @Override
     public void dispose() {

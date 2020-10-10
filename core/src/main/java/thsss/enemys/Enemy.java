@@ -23,7 +23,7 @@ public class Enemy extends CircleObject {
 
     }
     public void defeated() {
-        thsss.gameScreen.gameStage.enemyArray.removeValue(this, false);
+        thsss.gameScreen.gameStage.enemyLinkedList.remove(this);
         remove();
     }
     public Point getCheckPosition() {

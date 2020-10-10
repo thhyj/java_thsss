@@ -30,6 +30,7 @@ public class TestSpell extends SpellCard{
                     Math.min((Math.random() - 0.5) * 100 - 50, -20), bulletTest.initPosition);
             //   bulletTest.moveFunction = new LineMove(-0,-0.1,bulletTest.initPosition);
             thsss.gameScreen.gameStage.addActor(bulletTest);
+            bulletTest.setZIndex(3);
             bullets.add(bulletTest);
         }
     }

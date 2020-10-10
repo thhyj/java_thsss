@@ -130,14 +130,15 @@ public class CircleObject extends Actor {
     public boolean dispose() {
         if(this.hasParent()) {
             endBullet();
-            remove();
+            this.getParent().removeActor(this);
+
         }
         return true;
     }
 
     public void checkDispose() {
         if(nowPosition.x < 0 || nowPosition.y < 0 || nowPosition.x > 500 || nowPosition.y > 500 ){
-            this.remove();
+            if(this.hasParent()) this.getParent().removeActor(this);
         }
     }
     @Override

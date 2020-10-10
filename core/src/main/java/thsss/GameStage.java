@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.List;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.PooledLinkedList;
 import com.badlogic.gdx.utils.Scaling;
@@ -20,6 +21,7 @@ import thsss.enemys.Boss03;
 import thsss.enemys.Enemy;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class GameStage extends Stage {
     private Thsss thsss;
@@ -31,8 +33,12 @@ public class GameStage extends Stage {
     public static final int mainStageX = 35;
     public static final int MainStageY = 15;
     private Music bgm;
-    public Array<Actor> actorArray;
-    public Array<Enemy> enemyArray;
+   // public Array<Actor> actorArray;
+    //public Array<Enemy> enemyArray;
+   // public List<Actor> actorList;
+    //public List<Enemy> enemyList;
+    public LinkedList <Enemy> enemyLinkedList;
+    public LinkedList <Actor> actorLinkedList;
     public boolean bombing = false;
     public float damageRatio = 1.0f;
 
@@ -57,7 +63,7 @@ public class GameStage extends Stage {
             bulletTest.moveFunction = new LineMove((Math.random() - 0.5) * 100, Math.min((Math.random() - 0.5) * 100 - 50, -20), bulletTest.initPosition);
          //   bulletTest.moveFunction = new LineMove(-0,-0.1,bulletTest.initPosition);
             addActor(bulletTest);
-            actorArray.add(bulletTest);
+            actorLinkedList.add(bulletTest);
         }
 
     }
@@ -66,25 +72,25 @@ public class GameStage extends Stage {
         bgm.play();
         //Gdx.gl.glClearColor(1,1,1,1);
         //Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        actorArray = new Array<Actor>();
+        actorLinkedList = new LinkedList<Actor>();
         character = new Character(thsss);
         interFace = new InterFace(thsss);
         boss03 = new Boss03(thsss, new Point(200, 300));
-        enemyArray = new Array<Enemy>();
+        enemyLinkedList = new LinkedList<Enemy>();
         addActor(character);
         addActor(boss03);
         addActor(interFace);
         interFace.setZIndex(100);
         character.setZIndex(1);
         boss03.setZIndex(0);
-        enemyArray.add(boss03);
+        enemyLinkedList.add(boss03);
 
        // createBullets();
-        for(Actor a:actorArray) {
+     /*   for(Actor a:actorLinkedList) {
 
             addActor(a);
             a.setZIndex(20);
        //     actorArray.removeValue(a, true);
-        }
+        }*/
     }
 }

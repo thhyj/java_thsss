@@ -11,7 +11,7 @@ import thsss.SubPlane;
 import thsss.Thsss;
 import thsss.enemys.Enemy;
 
-public class CharacterAttack2 extends CircleObject {
+public class CharacterAttack2 extends CharacterAttack {
     private SubPlane subPlane;
 
     //Left is 0, Mid is 1, Right is 2
@@ -52,21 +52,7 @@ public class CharacterAttack2 extends CircleObject {
         radius = 32;
         hitDamage = 10;
     }
-    @Override
-    protected boolean checkHit() {
-        for(Enemy a: thsss.gameScreen.gameStage.enemyArray) {
-            double dis = checkPointPosition.getdis(new Point(a.getCheckPosition()));
-            if(dis <= radius + a.radius) {
-                a.hp -= getHitDamage();
-                return true;
-            }
-        }
-        return false;
-    }
 
-    private void hit() {
-
-    }
     @Override
     public void act(float delta) {
         existTime += delta;
@@ -82,11 +68,7 @@ public class CharacterAttack2 extends CircleObject {
         updateCheckPointPosition();
         appearance.setPosition((float) nowPosition.x - 8, (float)nowPosition.y);
         appearance.setRotation((float) angle);
-   //     System.out.println(appearance.getX() + appearance.getY());
+        //     System.out.println(appearance.getX() + appearance.getY());
     }
 
-    @Override
-    public void draw(Batch batch, float delta) {
-        appearance.draw(batch);
-    }
 }

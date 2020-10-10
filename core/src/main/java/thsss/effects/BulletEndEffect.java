@@ -40,8 +40,8 @@ public class BulletEndEffect extends Actor {
         for(int i = 1;i  <= 6; ++i)
         thsss.gameScreen.gameStage.addActor(new BulletBody(thsss, x + (float) ((Math.random() - 0.5) * 20),
                 y + (float) ((Math.random() - 0.5) * 20)));
-
-        remove();
+        if(hasParent())
+        getParent().removeActor(this);
     }
 
     @Override

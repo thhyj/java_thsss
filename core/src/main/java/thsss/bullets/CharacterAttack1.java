@@ -9,7 +9,7 @@ import thsss.*;
 import thsss.MoveMethod.LineMove;
 import thsss.enemys.Enemy;
 
-public class CharacterAttack1 extends CircleObject {
+public class CharacterAttack1 extends CharacterAttack {
 
     private SubPlane subPlane;
     public CharacterAttack1(Thsss thsss, Point point, SubPlane subPlane) {
@@ -30,21 +30,6 @@ public class CharacterAttack1 extends CircleObject {
         hitDamage = 10;
     }
     @Override
-    protected boolean checkHit() {
-        for(Enemy a: thsss.gameScreen.gameStage.enemyArray) {
-            double dis = checkPointPosition.getdis(new Point(a.getCheckPosition()));
-            if(dis <= radius + a.radius) {
-                a.hp -= getHitDamage();
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private void hit() {
-
-    }
-    @Override
     public void act(float delta) {
         existTime += delta;
         move();
@@ -58,10 +43,5 @@ public class CharacterAttack1 extends CircleObject {
         checkDispose();
         updateCheckPointPosition();
         appearance.setPosition((float) nowPosition.x - 24, (float)nowPosition.y);
-    }
-
-    @Override
-    public void draw(Batch batch, float delta) {
-        appearance.draw(batch);
     }
 }

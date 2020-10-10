@@ -23,7 +23,8 @@ public class BulletBody extends Item{
 
     private void get() {
         thsss.score += 1000;
-        remove();
+        if(hasParent())
+        this.getParent().removeActor(this);
     }
 
     @Override

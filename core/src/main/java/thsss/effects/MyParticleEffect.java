@@ -24,7 +24,8 @@ public class MyParticleEffect extends Actor {
         super.draw(batch, parentAlpha);
         lifeTime += thsss.gameScreen.delta;
         if(lifeTime > maxLife) {
-            remove();
+            this.getParent().removeActor(this);
+            //remove();
         } else {
             this.particleEffect.draw(batch, thsss.gameScreen.delta);
         }

@@ -42,3 +42,8 @@
 
 使用Bomb时的全屏消弹和伤害倍率提升。
 添加了自机子弹发射时的音效
+
+2020/10/9
+添加了子弹击中特效，修复了Z-index莫名失效的bug
+md，libgdx库的源码有毒，它设置Z-INDEX居然有一行index = min(index, children.size());
+也就是说我先创建的，zindex设置为100，还是可能实际只有2，然后被干掉 md，真tm鬼才
